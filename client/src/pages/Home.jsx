@@ -11,7 +11,7 @@ function Home() {
   // Fetch vendor locations and services
   useEffect(() => {
     axios
-      .get("http://localhost:5000/vendors/list")
+      .get(`${import.meta.env.VITE_BACKEND_HOST_URL}/vendors/list`)
       .then((response) => {
         const locations = [...new Set(response.data.map((v) => v.location))];
         const services = [...new Set(response.data.flatMap((v) => v.services))];
@@ -60,7 +60,7 @@ function Home() {
   const searchVendors = async () => {
     const query = `location=${location}&service=${service}`;
     const response = await axios.get(
-      `http://localhost:5000/vendors/search?${query}`
+      `${import.meta.env.VITE_BACKEND_HOST_URL}/vendors/search?${query}`
     );
     setVendors(response.data);
   };
@@ -68,7 +68,7 @@ function Home() {
   // Search vendors based nearby
   const nearByVendors = async () => {
     const response = await axios.get(
-      `http://localhost:5000/vendors/nearby?latitude=${location.latitude}&longitude=${location.longitude}`
+      `${import.meta.env.VITE_BACKEND_HOST_URL}/vendors/nearby?latitude=${location.latitude}&longitude=${location.longitude}`
     );
     if(response.data.length == 0){
       alert("No vendors found near you.");

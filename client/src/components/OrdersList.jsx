@@ -5,7 +5,7 @@ const OrdersList = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/orders/customer-orders", { headers: { Authorization: localStorage.getItem("token") } })
+    axios.get(`${import.meta.env.VITE_BACKEND_HOST_URL}/orders/customer-orders`, { headers: { Authorization: localStorage.getItem("token") } })
       .then((res) => setOrders(res.data))
       .catch((err) => console.error(err));
   }, []);

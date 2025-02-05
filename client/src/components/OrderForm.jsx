@@ -9,7 +9,7 @@ const OrderForm = ({ customerId }) => {
   const [instructions, setInstructions] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/vendors")
+    axios.get(`${import.meta.env.VITE_BACKEND_HOST_URL}/vendors`)
       .then((res) => setVendors(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -17,7 +17,7 @@ const OrderForm = ({ customerId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/orders/create", 
+      await axios.post(`${import.meta.env.VITE_BACKEND_HOST_URL}/orders/create`, 
         { vendorId: selectedVendor, service, pickupDate, instructions }, 
         { headers: { Authorization: localStorage.getItem("token") } }
       );

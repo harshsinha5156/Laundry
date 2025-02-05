@@ -9,7 +9,7 @@ function Vendors() {
 
   useEffect(() => {
     if (query) {
-      axios.get(`http://localhost:5000/vendors/search/location/${query}`)
+      axios.get(`${import.meta.env.VITE_BACKEND_HOST_URL}/vendors/search/location/${query}`)
         .then(res => setVendors(res.data))
         .catch(err => console.error(err));
     }

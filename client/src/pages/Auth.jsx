@@ -9,7 +9,7 @@ function Auth() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = isLogin ? "http://localhost:5000/auth/login" : "http://localhost:5000/auth/register";
+    const url = isLogin ? `${import.meta.env.VITE_BACKEND_HOST_URL}/auth/login` : `${import.meta.env.VITE_BACKEND_HOST_URL}/auth/register`;
     try {
       const res = await axios.post(url, formData);
       localStorage.setItem("token", res.data.token);

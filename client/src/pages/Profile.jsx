@@ -10,7 +10,7 @@ function Profile() {
     const fetchProfile = async () => {
       const token = localStorage.getItem("token");
       if (!token) return window.location.href = "/auth";
-      const res = await axios.get("http://localhost:5000/profile", { headers: { Authorization: token } });
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_HOST_URL}/profile`, { headers: { Authorization: token } });
       setUser(res.data);
     };
     fetchProfile();
@@ -18,7 +18,7 @@ function Profile() {
 
   const addService = async () => {
     if (!newService) return;
-    const res = await axios.put("http://localhost:5000/vendors/update-services", { service: newService }, 
+    const res = await axios.put(`${import.meta.env.VITE_BACKEND_HOST_URL}/vendors/update-services`, { service: newService }, 
       { headers: { Authorization: localStorage.getItem("token") } });
     setServices(res.data.services);
     setNewService("");
